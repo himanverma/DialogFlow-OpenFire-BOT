@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+    <title> DialogFlowBot Plugin Readme</title>
+    <style type="text/css">
+        BODY {
+            font-size : 100%;
+        }
+        BODY, TD, TH {
+            font-family : tahoma, verdana, arial, helvetica, sans-serif;
+            font-size : 0.8em;
+        }
+        H2 {
+             font-size : 10pt;
+             font-weight : bold;
+        }
+        A:hover {
+            text-decoration : none;
+        }
+        H1 {
+            font-family : tahoma, arial, helvetica, sans-serif;
+            font-size : 1.4em;
+            font-weight: bold;
+            border-bottom : 1px #ccc solid;
+            padding-bottom : 2px;
+        }
+
+        TT {
+            font-family : courier new;
+            font-weight : bold;
+            color : #060;
+        }
+        PRE {
+            font-family : courier new;
+            font-size : 100%;
+        }
+        #datatable TH {
+            color : #fff;
+            background-color : #2A448C;
+            text-align : left;
+        }
+        #datatable TD {
+            background-color : #FAF6EF;
+        }
+        #datatable .name {
+            background-color : #DCE2F5;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h1>
+    DialogFlowBot Plugin Readme
+</h1>
+
+<h2>Overview</h2>
+
+<p>
+    DialogFlowBot is an autoresponder that can be used to respond to incoming messages using Googles DialogFlow Service.
+</p>
+
+
+<h2>
+    DialogFlowBot properties
+</h2>
+
+    There are few properties that can be defined to change plugin behaviour:
+    <ul>
+        <li><code>plugin.dialog_flow_bot.debug</code> - enable debug logs. If something doesn't work set property to true</li>
+        <li><code>plugin.dialog_flow_bot.send_body</code> - boolean value to determine if message's body will be send. True by default.</li>
+        <li>
+        	<code>
+        		plugin.dialog_flow_bot.google_json_path
+        	</code> - 
+        	Google Service Access Credentials json file path on openfire server <code>(Eg. /var/www/GoogleDialogFlow.json)</code>
+    	</li>
+    	<li>
+        	<code>
+        		plugin.dialog_flow_bot.project_id
+        	</code> - 
+        	Google Service ProjectID (INFO : <a href="https://support.google.com/googleapi/answer/7014113?hl=en">Google HELP</a>)
+    	</li>
+    	<li>
+        	<code>
+        		plugin.dialog_flow_bot.lang
+        	</code> - 
+        	string value, DialogFlow Agent Language. Default <code>en-US</code> 
+    	</li>
+    	<li>
+        	<code>
+        		plugin.dialog_flow_bot.responder_jid
+        	</code> - 
+        	string value, From JabberID (Response messages's JID) <code>Eg. admin@localhost</code> 
+    	</li>
+    	<li>
+        	<code>
+        		plugin.dialog_flow_bot.watch_all
+        	</code> - 
+        	boolean value, Process all incoming messages, Default: true (If set false it will only process the messages with the set keyword)
+    	</li>
+    	<li>
+        	<code>
+        		plugin.dialog_flow_bot.watch_keyword
+        	</code> - 
+        	string value, To use this set the <code>watch_all</code> to <code>false</code> (Message only with this set keyword will be processed)
+    	</li>
+    	<li>
+        	<code>
+        		plugin.dialog_flow_bot.min_confidence
+        	</code> - 
+        	float value, This is the DialogFlows responses minimum confidence value for the result. If it matches only then the Bot will respond to message
+    	</li>
+    </ul>
+    <p>
+    <b>Note</b>: After changing the above setting you need to restart the plugin to apply the changes.
+<br>
+<br>
+<br>
+<h1> Response message Stanza</h1>
+<pre style="font:'calibre'; font-size:10px; font-weight:bold">
+&lt;body xmlns='http://jabber.org/protocol/httpbind'&gt;
+	&lt;message xmlns='jabber:client' to='user1@domain.com/converse.js-22295952' from='bot@domain.com' type='chat'&gt;
+		&lt;body&gt;This is a text response&lt;/body&gt;
+		&lt;data xmlns='dialogflowbot'&gt;{
+		  &quot;queryText&quot;: &quot; 03:10 me: @alfa market today?&quot;,
+		  &quot;parameters&quot;: {
+		  },
+		  &quot;allRequiredParamsPresent&quot;: true,
+		  &quot;fulfillmentText&quot;: &quot;This is a text response&quot;,
+		  &quot;fulfillmentMessages&quot;: [{
+		    &quot;text&quot;: {
+		      &quot;text&quot;: [&quot;This is a text response&quot;]
+		    }
+		  }],
+		  &quot;webhookSource&quot;: &quot;webhook&quot;,
+		  &quot;webhookPayload&quot;: {
+		    &quot;items&quot;: {
+		      &quot;&quot;: {
+		        &quot;close&quot;: 0.0
+		      }
+		    },
+		    &quot;status_code&quot;: 200.0,
+		    &quot;success&quot;: true,
+		    &quot;message&quot;: &quot;&quot;
+		  },
+		  &quot;intent&quot;: {
+		    &quot;name&quot;: &quot;projects/alphabot-204804/agent/intents/da95ae2f-32e1-4870-b49b-c3686e6e8f5c&quot;,
+		    &quot;displayName&quot;: &quot;market-today&quot;
+		  },
+		  &quot;intentDetectionConfidence&quot;: 0.88,
+		  &quot;diagnosticInfo&quot;: {
+		    &quot;webhook_latency_ms&quot;: 1154.0
+		  },
+		  &quot;languageCode&quot;: &quot;en-us&quot;
+		}&lt;/data&gt;
+	&lt;/message&gt;
+&lt;/body&gt;
+</pre>
+<br>
+<br>
+<hr>
+<sub>Author/Developer: Himanshu Verma</sub>
+</body>
+</html>
